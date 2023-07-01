@@ -1,8 +1,25 @@
-import React from 'react';
-import { Container } from '@mui/material';
+import { Container } from "@mui/material";
+import React from "react";
+import { Statistics } from "./statistics";
+import { TopRestaurants } from "./topRestaurants";
+import { BestRestaurants } from "./bestRestaurants";
+import { BestDishes } from "./bestDishes";
+import { Advertisements } from "./adverstisement";
+import { Events } from "./events";
+import { Recommendations } from "./recommendations";
+import '../../../css/home.css';
 
-export function Homepage() {
-    return (
-        <Container>Homepage</Container>
-    );
+
+export function HomePage(){
+    return(
+        <div className="homepage">
+            <Statistics/>
+            <TopRestaurants/>
+            <BestRestaurants/>
+            <BestDishes/>
+            <Advertisements/>
+            <Events/>
+            <Recommendations/>
+        </div>
+    )
 }
