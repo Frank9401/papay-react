@@ -35,12 +35,11 @@ export function BestDishes() {
 
                             </Stack>
                         </Box>
-                        \
                         <Box className="dish_box">
                             <Stack
                                 className="dish_img"
                                 sx={{
-                                    backgroundImage: `url("")`,
+                                    backgroundImage: `url(")`,
 
                                 }}
                             >
@@ -94,7 +93,7 @@ export function BestDishes() {
                             <Stack
                                 className="dish_img"
                                 sx={{
-                                    backgroundImage: `url("")`,
+                                    backgroundImage: `url()`
 
                                 }}
                             >
