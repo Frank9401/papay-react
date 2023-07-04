@@ -31,17 +31,17 @@ export function NavbarRestaurant (props: any) {
                     </NavLink>
                 </Box>
                 <Box className ="hover-line" onClick={props.setPath} >
-                    <NavLink to="/" activeClassName="underline">
+                    <NavLink to="/" >
                         Buyurtma
                     </NavLink>
                 </Box>
                 <Box className ="hover-line" onClick={props.setPath} >
-                    <NavLink to="/" activeClassName="underline">
+                    <NavLink to="/" >
                         Jamiyat
                     </NavLink>
                 </Box>
                 <Box className ="hover-line" onClick={props.setPath} >
-                    <NavLink to="/" activeClassName="underline">
+                    <NavLink to="/" >
                         Yordam
                     </NavLink>
                 </Box>
@@ -56,7 +56,7 @@ export function NavbarRestaurant (props: any) {
                   //onClick={handleClick}
                   >
                     <Badge badgeContent={3} color="secondary">
-                        <img src={"/icons/shopping_cart.svg"}/>
+                        <img src={"/icons/shopping-cart.svg"}/>
                     </Badge>
                   </IconButton>
                 </Box>
