@@ -76,7 +76,7 @@ export function NavbarRestaurant (props: any) {
             <Stack className="head_information" justifyContent={"row"}>
                 <Stack 
                 justifyContent={'column'}
-                style={{ marginTop: "86px", marginLeft: "24px"}}
+                style={{ marginTop: "50px", marginLeft: "30px"}}
                 >
                     <Box>
                         <img src="/icons/Welcome.svg" />

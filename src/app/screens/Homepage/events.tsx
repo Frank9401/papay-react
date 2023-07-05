@@ -43,7 +43,6 @@ export function Events() {
   return (
     <div className={"events_frame"}>
       <Container sx={{ overflow: "hidden" }}>
-        <Stack sx={{mt: "43px" }} flexDirection={"row"}></Stack>
         <Stack className={"events_main"}>
           <Box className={"events_text"}>
             <span className={"category_title"}>Hodisalar</span>

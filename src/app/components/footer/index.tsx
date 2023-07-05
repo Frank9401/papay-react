@@ -40,14 +40,14 @@ export function Footer() {
                 <Box className="find">Bizni top</Box>
                 <Box className="devider"></Box>
                 <Stack className="details" sx={{mt:"19px"}}>
-                    <Box className="detail_first">I</Box>
+                    <Box className="detail_first">L</Box>
                     <Box className="detail_second">Uzbekistan</Box>                </Stack>
                 <Stack className="details" sx={{mt:"42px"}}>
-                   <Box className="detail_first">I</Box>
+                   <Box className="detail_first">P</Box>
                    <Box className="detail_second">+998909889999</Box>
                 </Stack>
                 <Stack className="details" sx={{mt:"9px"}}>
-                   <Box className="detail_first">I</Box>
+                   <Box className="detail_first">E</Box>
                    <Box className="detail_second">papays@restaurant@gmail.com</Box>                 </Stack>
             </Stack>
           </Stack>

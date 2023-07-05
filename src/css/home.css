@@ -213,6 +213,13 @@
     overflow: hidden;
 }
 
+.homepage .events_main {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .homepage .events_main .events_text {
     position: relative;
     width: auto;
