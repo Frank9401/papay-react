@@ -1,117 +1,113 @@
 .homepage {
     background: #0b0e11;
-}
-
-.homepage .static_frame{
+  }
+  .homepage .static_frame {
     width: 100%;
     background: #2c261e;
-}
-
-.homepage .personage_img.left{
+  }
+  
+  .homepage .personage_img.left {
     width: 204px;
-    height: 200px;
-    background:url("/public/home/papays1.png");
-    transform: matrix(1,0,0,1,0,0);
+    height: 204px;
+    background: url("/public/home/papays1.png");
+    transform: matrix(+1, 0, 0, 1, 0, 0);
     background-size: cover;
-
-}
-
-.homepage .personage_img.right{
+  }
+  
+  .homepage .personage_img.right {
     width: 204px;
-    height: 200px;
-    background:url("/public/home/papays1.png");
-    transform: matrix(-1,0,0,1,0,0);
+    height: 204px;
+    background: url("/public/home/papays1.png");
+    transform: matrix(-1, 0, 0, 1, 0, 0);
     background-size: cover;
-
-}
-
-.homepage .static_box{
-    width: 191px;
-    height: 120px;
+  }
+  
+  .homepage .static_box {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
-}
-
-.homepage .static_box .static_num{
-    font-family:"Poppins" ;
+  }
+  
+  .homepage .static_box .static_num {
+    font-family: "Poppins";
     font-style: normal;
-    font-size: 54px;
     font-weight: 600;
+    font-size: 54px;
     line-height: 81px;
     text-align: center;
     color: #ffffff;
-}
-
-
-.homepage .static_box .static_text{
+  }
+  
+  .homepage .static_box .static_text {
     font-family: "Poppins";
-    font-style:normal;
+    font-style: normal;
     font-weight: 500;
     font-size: 20px;
     line-height: 30px;
     text-align: center;
-    color: #e3c08d;
-}
-
-.homepage .top_restaurant_frame{
+    color: #ffffff;
+  }
+  
+  .homepage .top_restaurant_frame {
     width: 100%;
     height: 605px;
     display: flex;
     background: #0b0e11;
-
-}
-
-.homepage .category_title{
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 42px;
-  color: #e3c08d;
-  display: flex;
-}
-
-.homepage .best_restaurant_frame {
+  }
+  
+  .homepage .category_title {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+    color: #e3c08d;
+  }
+  /* //korish kerak */
+  .homepage .category_title {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+  
+    color: #e3c08d;
+  }
+  
+  .homepage .best_restaurant_frame {
     width: 100%;
-    height: 755px;
+    height: 775px;
     display: flex;
     background: #0b0e11;
-
-}
-
-.homepage .best_dishes_frame {
-    margin-top: 170px;
+  }
+  .homepage .best_dishes_frame {
     width: 100%;
     height: 462px;
+    margin-top: 90px;
     display: flex;
- 
-}
-
-.homepage .dish_box {
+  }
+  .best_dishes_frame .dish_box {
     margin-right: 26px;
     width: 273px;
     height: 376px;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.homepage .dish_box .dish_img {
+  }
+  
+  .best_dishes_frame .dish_box .dish_image {
     position: relative;
     width: 273px;
     height: 275px;
-    background-image: url("/public/dishes/kebulirice.png");
-    background-repeat: no-repeat;
     background-size: cover;
     border-radius: 0px 50px 0px 0px;
     display: flex;
     flex-direction: column;
-}
-
-.homepage .dish_img .dish_sale {
-    margin-top:  43px;
+  }
+  
+  .best_dishes_frame .dish_box .dish_image .dish_sale {
+    margin-top: 43px;
     width: 77px;
     height: 39px;
     display: flex;
@@ -121,20 +117,19 @@
     box-shadow: 4px 6px 20px rgba(0, 0, 0, 0.1);
     border-radius: 0px 50px 50px 0px;
     font-family: "Poppins";
-    font-style: "normal";
+    font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
     color: #ffffff;
-
-}
-
-.homepage .view_btn {
+  }
+  
+  .best_dishes_frame .dish_box .dish_image .view_btn {
     width: 163px;
     height: 50px;
     margin-top: 31px;
     margin-left: 55px;
-    margin-left: 25px;
+    padding-left: 25px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -151,42 +146,40 @@
     font-size: 13px;
     line-height: 20px;
     color: #ffffff;
-
-}
-
-.homepage .dish_img:hover .view_btn {
+  }
+  
+  .homepage .dish_image:hover .view_btn {
     opacity: 1;
-}
-
-.homepage .dish_box .dish_desc {
+  }
+  
+  .homepage .dish_box .dish_desc {
     width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.homepage .dish_desc .dish_title_text {
+  }
+  
+  .homepage .dish_desc .dish_title_text {
     margin-top: 18px;
     font-family: "Poppins";
     font-style: normal;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 30px;
-
     color: #d1d1d1;
-}
-
-.homepage .dish_desc .dish_desc_text {
+  }
+  
+  .homepage .dish_desc .dish_desc_text {
     margin-top: 15px;
     font-family: "Poppins";
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 24px;
     line-height: 36px;
     color: #e3c08d;
-}
-
-.homepage .ads_restaurant_frame {
+  }
+  
+  .homepage .ads_restaurant_frame {
     width: 100%;
     height: 693px;
     display: flex;
@@ -194,42 +187,42 @@
     box-shadow: 0px -62px 60px 20px rgb(217, 217, 217 / 40%);
     margin-top: 186px;
     background-color: #956dd3;
-}
-
-.homepage .ads_restaurant_frame {
+  }
+  
+  .homepage .ads_video {
     width: 100%;
-   background: #0c0e12;
-   display: flex;
-   box-shadow: 0px -8px 90px rgb(215 215 255);
-   transform: scale(1.5);
-   overflow: hidden;
-}
-
-.homepage .events_frame {
+    background-color: #0c0e12;
+    display: flex;
+    box-shadow: 0px -8px 90px rgb(215, 215, 215);
+    transform: scale(1.5);
+    overflow: hidden;
+  }
+  
+  .homepage .events_frame {
     margin-top: 45px;
     width: 100%;
     height: 700px;
     display: flex;
     overflow: hidden;
-}
-
-.homepage .events_main {
+  }
+  
+  .homepage .events_main {
     position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
-}
-
-.homepage .events_main .events_text {
+  }
+  
+  .homepage .events_main .events_text {
     position: relative;
     width: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-.homepage .events_main .prev_next_frame {
+  }
+  
+  .homepage .events_main .previous_next_frame {
     position: relative;
     display: flex;
     justify-content: center;
@@ -238,111 +231,88 @@
     height: 24px;
     margin-left: 901px;
     margin-top: 19px;
-}
-
-.homepage .dot_frame_pagination {
+  }
+  
+  .homepage .dot_frame_pagination {
     position: relative;
     width: auto;
     display: flex;
-
-}
-
-.homepage .events_main .events_info{
+  }
+  
+  .homepage .events_main .events_info {
     margin-top: 75px;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-
-.homepage .events_info .events_info_frame{
+  }
+  
+  .homepage .events_info .events_info_frame {
     position: relative;
     width: 579px;
     height: 447px;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.homepage .events_img{
+  }
+  
+  .homepage .events_info .events_info_frame .events_img {
     width: 100%;
     height: 100%;
     display: flex;
-    border-radius: 10px;
+    border-radius: 15px;
     background-size: cover;
-}
-
-.homepage .events_desc{
+  }
+  
+  .homepage .events_desc {
     position: absolute;
     padding: 10px;
-    display: flex;
     width: 90%;
     height: auto;
     bottom: 5px;
     background: #ffffff;
     box-shadow: 0px 40px 30px rgba(25, 25, 46, 0.04);
     border-radius: 8px;
-}
-
-.homepage .events_desc .events_bott{
+  }
+  .homepage .events_desc .events_bott {
     width: 97%;
     height: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-}
-
-
-.homepage .events_desc .events_bott .bott_left{
+  }
+  .homepage .events_desc .events_bott .bott_left {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-}
-
-.homepage .bott_left .event_title_speaker{
-
+  }
+  
+  .homepage .bott_left .event_title_speaker {
     display: flex;
     flex-direction: row;
-    justify-content:space-between ;
-}
-
-.homepage .event_title_speaker .event_organizator{
+    justify-content: space-between;
+  }
+  .homepage .event_title_speaker .event_organizator {
     display: flex;
     align-items: center;
-}
-
-.homepage .event_organizator .spec_text_author{
-
+  }
+  .homepage .event_organizator .spec_text_author {
     font-family: "GT Walsheim Pro";
     font-style: normal;
     line-height: 34px;
-    color:#140342
-}
-
-
-.homepage .bott_left .text_desc{
-    font-family: "GT Walsheim Pro";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 17px;
-    line-height: 26px;
     color: #4f547b;
-
-
-}
-
-.homepage .bott_left .bott_info{
+  }
+  .homepage .bott_left .bott_info {
     display: flex;
     justify-content: flex-end;
     flex-direction: row;
     width: 100%;
     height: 16px;
-}
-
-.homepage .bott_info .bott_info_main{
+  }
+  .homepage .bott_info .bott_info_main {
     margin-left: 10px;
     display: flex;
     justify-content: space-between;
@@ -355,32 +325,29 @@
     font-size: 14px;
     line-height: 16px;
     color: #4f547b;
-}
-
-
-.homepage .swiper_wrapper{
+  }
+  
+  .homepage .swiper-wrapper {
     display: flex;
     flex-direction: row;
-
-}
-
-.homepage .swiper-pagination-bullet{
-    margin-right: 5px;
+  }
+  
+  .homepage .swiper-pagination-bullet {
+    margin-left: 5px;
     width: 8px;
     height: 8px;
     text-align: center;
     opacity: 1;
-    background:#ffffff ;
+    background-color: #ffffff;
     border-radius: 50%;
-}
-
-.homepage .swiper-pagination-bullet-active{
-    background:#007aff ;
+  }
+  
+  .homepage .swiper-pagination-bullet-active {
+    background: #007aff;
     border-radius: 50%;
-}
-
-
-.homepage .top_article_frame {
+  }
+  
+  .homepage .top_article_frame {
     width: 100%;
     height: auto;
     display: flex;
@@ -392,7 +359,7 @@
     height: auto;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: column;
   }
   
   .homepage .article_main .article_container {
@@ -401,7 +368,6 @@
     display: flex;
     flex-direction: column;
   }
-  
   .homepage .article_main .article_category {
     display: flex;
     justify-content: center;
@@ -412,7 +378,6 @@
     line-height: 44px;
     color: #ffffff;
   }
-  
   .homepage .article_container .article_box {
     margin-top: 18px;
     width: 100%;
@@ -420,14 +385,13 @@
     display: flex;
     border-radius: 20px;
     flex-direction: row;
-    background: #ffffff;
+    background: #fff;
     box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
   }
-  
   .homepage .article_container .article_news {
     width: 100%;
     border-radius: 20px;
-    height: 340px;
+    height: 300px;
     display: flex;
     flex-direction: row;
     overflow: hidden;
@@ -435,7 +399,7 @@
     box-shadow: 0px 4px 40px rgba(83, 38, 208, 0.25);
   }
   
-  .homepage .article_box .article_img {
+  .homepage .article_box .article_img{
     width: 150px;
     height: 153px;
     border-radius: 0px;
@@ -444,29 +408,29 @@
     background-repeat: no-repeat;
   }
   
-  .homepage .article_box .article_info {
+  .homepage .article_box .article_info{
     padding: 10px 0px;
     width: 318px;
     height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #ffffff;
+    background-color: #fff;
   }
   
-  .homepage .article_info .article_main_info {
+  .homepage .article_info .article_main_info{
     width: 92%;
     height: 95%;
   }
   
-  .homepage .article_main_info .article_author {
+  .homepage .article_main_info .article_author{
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
   }
   
-  .homepage .article_author .author_username {
+  .homepage .article_author .author_username{
     margin-left: 10px;
     font-family: "Poppins";
     font-style: normal;
@@ -476,7 +440,7 @@
     color: #000000;
   }
   
-  .homepage .article_main_info .article_title {
+  .homepage .article_main_info .article_title{
     margin-top: 18px;
     display: flex;
     font-family: "Poppins";
@@ -486,8 +450,7 @@
     line-height: 33px;
     color: #e3c08d;
   }
-  
-  .homepage .article_main_info .article_desc {
+  .homepage .article_main_info .article_desc{
     margin-top: 10px;
     font-family: "Poppins";
     font-style: normal;
@@ -497,20 +460,19 @@
     color: #808080;
   }
   
-  .homepage .personage_img.right {
+  .homepage .personage_img_right {
     margin-right: -40px;
-    width: 196px;
+    width: 216px;
     height: 200px;
-    transform: matrix(1, 0, 0, 1, 0, 0);
+    transform: matrix(1,0,0,1,0,0);
     background: url("/public/home/papays1.png");
-    background-size: cover;
   }
   
-  .homepage .personage_img.left {
+  .homepage .personage_img_left {
     margin-right: -40px;
-    width: 196px;
+    width: 216px;
     height: 200px;
-    transform: matrix(-1, 0, 0, 1, 0, 0);
+    transform: matrix(-1,0,0,1,0,0);
     background: url("/public/home/papays1.png");
-    background-size: cover;
   }
+  
