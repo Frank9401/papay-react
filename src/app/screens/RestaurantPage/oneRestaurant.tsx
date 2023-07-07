@@ -18,7 +18,7 @@ const product_list = Array.from(Array(8).keys());
 
 export function OneRestaurant() {
     return (
-         <div className="single_restaurant">
+         <div className={"single_restaurant"}>
         <Container>
             <Stack flexDirection={"column"} alignItems={"center"}>
                 <Stack className={"avatar_big_box"}>
@@ -65,7 +65,7 @@ export function OneRestaurant() {
                         prevEl: ".restaurant-prev",
                     }}
                     >
-                        {restaurant_list.map((ele, index) =>{
+                        {restaurant_list.map((ele, index) => {
                             return (
                                 <SwiperSlide
                                 style={{cursor: "pointer"}}
