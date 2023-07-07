@@ -180,7 +180,7 @@ export function BestRestaurants(){
                     100{""}
                     <Visibility sx={{fontSize:20, marginLeft:"5px"}}/>
                 </Typography>
-                <Box sx={{width:2,bgcolor:'divider'}}/>
+                <Box sx={{width:2, bgcolor:'divider'}}/>
                 <Typography
                 sx={{
                     fontWeight:"md",
@@ -189,7 +189,7 @@ export function BestRestaurants(){
                     display:"flex",
                 }}>
                     <div>500</div>
-                    <Favorite sx={{fontSize:20,marginLeft:"5px"}}/>
+                    <Favorite sx={{fontSize:20, marginLeft:"5px"}}/>
                 </Typography>
             </CardOverflow>
                     </Card>
