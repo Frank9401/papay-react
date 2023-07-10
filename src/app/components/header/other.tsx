@@ -20,7 +20,7 @@ export function NavbarOther (props: any) {
             justifyContent={"space-between"}
             >
               <Box>
-                <img src="icons/papay.svg" />
+                <img src={"icons/Papay.svg"} />
               </Box>
               
               <Stack flexDirection={"row"}
@@ -88,7 +88,7 @@ export function NavbarOther (props: any) {
                 style={{ marginTop: "86px", marginLeft: "24px"}}
                 >
                     <Box>
-                        <img src="/icons/Welcome.svg" />
+                        <img src="/icons/Wellcome.svg" />
                     </Box>
                     <Box className="define_restaurant">
                         The Authentic Restaurant & Cafe

@@ -13,79 +13,10 @@ const product_list = Array.from(Array(8).keys())
 
 
 export function OneRestaurant() {
-<<<<<<< HEAD
    return <div className="single_restaurant">
       <Container>
 
          <Stack flexDirection={"column"} alignItems={"center"}>
-=======
-    return (
-         <div className={"single_restaurant"}>
-        <Container>
-            <Stack flexDirection={"column"} alignItems={"center"}>
-                <Stack className={"avatar_big_box"}>
-                    <Box className={"top_text"}>
-                        <p>Texas De Brazil Restaurant</p>
-                        <Box className={"Single_search_big_box"}>
-                            <form className={"Single_search_form"} action={""} method={""}>
-                                <input
-                                type={"search"}
-                                className={"Single_searchInput"}
-                                name={"Single_resSearch"}
-                                placeholder={"Qidiruv"}
-                                />
-                                <Button 
-                                className={"Single_button_search"}
-                                variant="contained"
-                                endIcon={<SearchIcon/>}
-                                >
-                                    Izlash
-                                </Button>
-                            </form>
-                        </Box>
-                    </Box>
-                </Stack>
-
-            <Stack
-                style={{ width: "100%", display: "flex"}}
-                flexDirection={"row"}
-                sx={{mt:"35px"}}
-                >
-                    <Box className={"prev_btn restaurant-prev"}>
-                        <ArrowBackIosNewIcon
-                        sx={{ fontSize: 40 }}
-                        style={{ color:"white"}}
-                        />
-                    </Box>
-                    <Swiper
-                    className={"restaurant_avatars_wrapper"}
-                    slidesPerView={7}
-                    centeredSlides={false}
-                    spaceBetween={30}
-                    navigation ={{
-                        nextEl: ".restaurant-next",
-                        prevEl: ".restaurant-prev",
-                    }}
-                    >
-                        {restaurant_list.map((ele, index) => {
-                            return (
-                                <SwiperSlide
-                                style={{cursor: "pointer"}}
-                                key={index}
-                                className={"restaurant_avatars"}
-                                >
-                                    <img src={"/restaurant/burak.jpeg"}/>
-                                    <span>Burak</span>
-                                </SwiperSlide>
-                            );
-                        })}
-                    </Swiper>
-                    <Box 
-                    className={"next_btn restaurant-next"}
-                    style={{color: "white"}}
-                    >
-                        <ArrowForwardIosIcon sx={{ fontSize: 40}}/>
->>>>>>> a6cd3f4d1a0739b7185f0d54b76aa3bdee630543
 
             <Stack className="avatar_big_box">
 

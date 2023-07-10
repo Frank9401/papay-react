@@ -1,8 +1,10 @@
-import React from 'react';
-import { Container } from '@mui/material';
+import React from "react";
+import { Container } from "@mui/material";
 
 export function MemberPage() {
     return (
-        <Container>MemberPage</Container>
+        <Container>
+            <h1>MemberPage</h1>
+        </Container>
     );
 }

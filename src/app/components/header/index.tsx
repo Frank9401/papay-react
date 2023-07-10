@@ -13,7 +13,7 @@ export function NavbarHome(props:any) {
           justifyContent={"space-between"}
         >
           <Box>
-            <img src="/icons/Papay.svg"  />
+            <img src= {"/icons/Papay.svg" }/>
           </Box>
           <Stack
             flexDirection={"row"}
@@ -70,7 +70,7 @@ export function NavbarHome(props:any) {
         <Stack className="head_information" justifyContent={"row"}>
             <Stack justifyContent={'column'}
             style={{marginTop:"86px",marginLeft:"24px"}}>
-                <Box><img src="/icons/Welcometo.svg" alt="" /></Box>
+                <Box><img src="/icons/Wellcometo.svg" alt="" /></Box>
                 <Box className="define_restaurant">The Authentic Restaurant & Cafe</Box>
                 <Box className="timeline_service">24 soat xizmatingizdamiz</Box>
                 <Box sx={{mt:"90px"}}>

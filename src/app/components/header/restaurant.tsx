@@ -79,7 +79,7 @@ export function NavbarRestaurant (props: any) {
                 style={{ marginTop: "50px", marginLeft: "30px"}}
                 >
                     <Box>
-                        <img src="/icons/Welcome.svg" />
+                        <img src="/icons/Wellcome.svg" />
                     </Box>
                     <Box className="define_restaurant">
                         The Authentic Restaurant & Cafe
