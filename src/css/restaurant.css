@@ -759,7 +759,7 @@
 }
 .chosen_dish_page .dish_price_box span {
   color: #000;
-  font-family: Poppins;
+  font-family: "Poppins";
   font-size: 25px;
   font-style: normal;
   font-weight: 600;
@@ -771,4 +771,5 @@
   height: auto;
   justify-content: center;
   width: 100%;
+  background: #000;
 }
