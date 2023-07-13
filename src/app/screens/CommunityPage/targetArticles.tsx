@@ -9,7 +9,7 @@ export function TargetArticles(props: any) {
     return (
         <Stack>
             {props.targetBoArticles?.map((article: any, index: string) => {
-                const art_img_url = "/community/default_article.svg";
+                const art_img_url = "/others/sandwich.jpg";
                 return (
                     <Link
                         className="all_article_box"

@@ -20,7 +20,7 @@ export function NavbarOther (props: any) {
             justifyContent={"space-between"}
             >
               <Box>
-                <img src={"icons/Papay.svg"} />
+                <img src={"/icons/Papay.svg"} />
               </Box>
               
               <Stack flexDirection={"row"}

@@ -26,7 +26,7 @@ export function ChosenDish() {
                modules={[FreeMode, Navigation, Thumbs]}
             >
                {chosen_list.map((ele) => {
-                  const img_path = `/others/stake.jpg`
+                  const img_path = `/others/qovurma.jpg`
                   return (
                      <SwiperSlide>
                         <img src={img_path} style={{ width: "100%", height: "100%" }} alt="" />
@@ -43,7 +43,7 @@ export function ChosenDish() {
                slidesPerView={1}
             >
                {chosen_list.map((ele) => {
-                  const img_path = `/others/stake.jpg`
+                  const img_path = `/others/qovurma.jpg`
                   return (
                      <SwiperSlide style={{ width: "100%", height: "100%", display: "flex" }}>
                         <img src={img_path} style={{ borderRadius: "15px", marginRight: "20px" }} alt="" />
@@ -57,7 +57,7 @@ export function ChosenDish() {
          </Stack>
          <Stack className="chosen_dish_info_container">
             <Box className="chosen_dish_info_box">
-               <strong className="dish_txt">Delicious stake</strong>
+               <strong className="dish_txt">Mazali Qovurma</strong>
                <span className="resto_name">Texas De Brazil</span>
                <Box className="rating_box">
                   <Rating name="half-rating" defaultValue={3.5} precision={0.5} />
@@ -77,7 +77,7 @@ export function ChosenDish() {
                      </div>
                   </div>
                </Box>
-               <p className="dish_desc_info">Juda mazzali Stake</p>
+               <p className="dish_desc_info">Juda mazzali Qovurma</p>
                <Marginer
                   direction="horizontal"
                   height="1"
