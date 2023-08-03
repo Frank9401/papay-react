@@ -1,9 +1,16 @@
-
+import React, { useEffect, useState } from "react";
 import { Box, Container, Stack,Button, IconButton, Badge } from "@mui/material";
-import React from "react";
 import { NavLink } from "react-router-dom";
 
 export function NavbarHome(props:any) {
+//INITIALIZATIONS
+const [count, setCount] = useState(0);
+const [value, setValue] = useState(true);
+
+useEffect(() => {
+    setCount(count + 1)
+}, [value])
+
   return (
     <div className="format home_navbar">
       <Container>
@@ -13,7 +20,7 @@ export function NavbarHome(props:any) {
           justifyContent={"space-between"}
         >
           <Box>
-            <img src= {"/icons/Papay.svg" }/>
+            <img src= "/icons/Papay.svg" alt = "Papay_icon"/>
           </Box>
           <Stack
             flexDirection={"row"}
@@ -48,13 +55,8 @@ export function NavbarHome(props:any) {
             </Box>
             <Box className="hover-line">
               <IconButton
-              aria-label="cart"
-              id="black-button"
-              aria-controls={undefined} 
-              aria-haspopup="true"
-              aria-expanded={undefined}
-            //   onClick={handleClick}
-              >
+              aria-label="cart" id="basic-button" aria-controls={undefined} aria-haspopup="true" aria-expanded={undefined}>
+
                <Badge badgeContent={3} color="secondary">
                 <img src={'/icons/shopping-cart.svg'} alt="" />
                </Badge>
@@ -70,12 +72,13 @@ export function NavbarHome(props:any) {
         <Stack className="head_information" justifyContent={"row"}>
             <Stack justifyContent={'column'}
             style={{marginTop:"86px",marginLeft:"24px"}}>
-                <Box><img src="/icons/Wellcometo.svg" alt="" /></Box>
+                <Box><img src="/icons/Wellcometo.svg" alt="Welcome_svg" /></Box>
                 <Box className="define_restaurant">The Authentic Restaurant & Cafe</Box>
-                <Box className="timeline_service">24 soat xizmatingizdamiz</Box>
-                <Box sx={{mt:"90px"}}>
-                    <Button variant="contained" style={{width:"210px",height:"60px",background:'#1976d2',color:'#ffffff'}}>
-                        RO'YXATDAN O'TISH
+                <Box className="timeline_service">{count} soat xizmatingizdamiz.</Box>
+                    <Box sx={{ mt: "90px" }}>
+                        <Button variant="contained" onClick={() => setValue(!value)}
+                            style={{ width: "210px", height: "60px", background: "#1976d2", color: "#FFFFFF" }}>
+                            RO'YHATTAN O'TISH
                         </Button>
                         </Box>
               </Stack>

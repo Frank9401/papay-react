@@ -25,13 +25,13 @@ function App() {
 
   return (
     <Router>
-      {main_path =='/=' ? (
+      {main_path ==='/' ? 
       <NavbarHome setPath={setPath} />
-     ) : main_path.includes ("/restaurant") ? (
+      : main_path.includes ("/restaurant") ? 
       <NavbarRestaurant setPath={setPath} />
-     ) : (
+      : 
       <NavbarOther setPath={setPath} />
-     )}
+     }
     <div>
         
         <Switch>
@@ -66,6 +66,3 @@ function App() {
 
 export default App;
 
-function Home() {
-  return <h2>Home</h2>;
-}
