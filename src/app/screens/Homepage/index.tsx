@@ -10,14 +10,39 @@ import { Recommendations } from "./recommendations";
 import '../../../css/home.css';
 
 
-export function HomePage(){
+//Redux 
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
+import { createSelector } from "@reduxjs/toolkit";
+import { setTopRestaurants } from "../../screens/Homepage/slice";
+import { retrieveTopRestaurants } from "../../screens/Homepage/selector";
+import { Restaurant } from "../../../types/user";
 
+
+/** Redux Slice */
+const actionDispatch = (dispatch: Dispatch) => ({
+    setTopRestaurants: (data: Restaurant[]) => dispatch(setTopRestaurants(data))
+});
+/** Redux Selector */
+const topRestaurantRetriever = createSelector(
+    retrieveTopRestaurants,
+    (topRestaurants) => ({
+        topRestaurants
+    })
+);
+
+
+export function HomePage(){
+        /** Initializations */
+        const { setTopRestaurants } = actionDispatch(useDispatch());
+        const { topRestaurants } = useSelector(topRestaurantRetriever)
+    
+        console.log("topRestaurants:::", topRestaurants);
+    
     useEffect(() => {
-        console.log("componentDidMount => Data fetch");
-        return () => {
-            console.log("componentWillUnmount process");
-        }
-    }, [])
+      setTopRestaurants([]);
+        },
+    []);
 
     return(
         <div className="homepage">
