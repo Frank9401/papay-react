@@ -23,6 +23,8 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/redux-logger": "^3.0.9",
     "@types/styled-components": "^5.1.26",
+    "assert": "^2.0.0",
+    "axios": "^1.4.0",
     "deb": "^0.2.1",
     "lab": "^18.0.2",
     "moment": "^2.29.4",

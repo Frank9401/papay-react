@@ -17,6 +17,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { setTopRestaurants } from "../../screens/Homepage/slice";
 import { retrieveTopRestaurants } from "../../screens/Homepage/selector";
 import { Restaurant } from "../../../types/user";
+import RestaurantApiService from "../../apiServices/restaurantApiService";
 
 
 /** Redux Slice */
@@ -40,6 +41,7 @@ export function HomePage(){
         console.log("topRestaurants:::", topRestaurants);
     
     useEffect(() => {
+        const restaurantService = new RestaurantApiService();
       setTopRestaurants([]);
         },
     []);
