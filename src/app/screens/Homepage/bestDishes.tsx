@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { createSelector } from "@reduxjs/toolkit";
-import { trendProducts } from "../../screens/Homepage/slice";
+import { setTrendProducts } from "../../screens/Homepage/slice";
 import { Product } from "../../../types/product";
 import ProductApiService from "../../apiServices/productApiService";
 import { retrieveTrendProducts } from "./selector";
@@ -17,7 +17,7 @@ import { serviceApi } from "../../../lib/config";
 
 /** Redux Slice */
 const actionDispatch = (dispatch: Dispatch) => ({
-    setTrendProducts: (data: Product[]) => dispatch(trendProducts(data))
+    setTrendProducts: (data: Product[]) => dispatch(setTrendProducts(data))
 });
 
 /** Redux Selector */

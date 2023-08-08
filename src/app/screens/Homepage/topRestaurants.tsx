@@ -10,6 +10,7 @@ import { CssVarsProvider } from "@mui/joy/styles";
 import { CardOverflow, IconButton } from "@mui/joy";
 import { Favorite } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+
 //Redux 
 import { useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
@@ -145,4 +146,4 @@ export function TopRestaurants() {
       </Container>
     </div>
   );
-};
+}

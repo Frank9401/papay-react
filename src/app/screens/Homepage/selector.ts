@@ -1,7 +1,9 @@
-import { createSelector } from "reselect";
+import { createSelector } from "@reduxjs/toolkit";
 import { AppRootState } from "../../../types/screen";
+import { HomePage } from ".";
 
 const selectHomePage = (state: AppRootState) => state.homePage;
+
 export const retrieveTopRestaurants = createSelector(
     selectHomePage,
     (HomePage) => HomePage.topRestaurants

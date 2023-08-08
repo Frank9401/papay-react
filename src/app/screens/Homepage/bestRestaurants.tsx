@@ -136,4 +136,4 @@ export function BestRestaurants() {
             </Stack>
         </Container>
     </div>
-};
+}
