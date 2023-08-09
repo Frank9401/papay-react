@@ -17,3 +17,7 @@ console.log('==verify==');
 console.log(member_data);
 
 export const verifyMemberData = member_data ? member_data : null;
+
+if (!cookie.get("access_token")) {
+    localStorage.removeItem("member_data")
+}

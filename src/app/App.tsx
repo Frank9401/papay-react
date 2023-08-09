@@ -14,11 +14,10 @@ import { HelpPage } from './screens/HelpPage';
 import { LoginPage } from './screens/LoginPage';
 import { NavbarHome } from './components/header';
 import { NavbarRestaurant } from './components/header/restaurant';
-import { NavbarOther } from './components/header/other';
+import { NavbarOthers } from './components/header/other';
 import { HomePage } from './screens/Homepage';
 import { Footer } from './components/footer';
 import AuthenticationModal from "./components/auth";
-
 import { Member } from "../types/user";
 import { serviceApi } from "../lib/config";
 import {sweetFailureProvider,  sweetTopSmallSuccessAlert,} from "../lib/sweetAlert";
@@ -31,14 +30,11 @@ import "../app/apiServices/verify";
 function App() {
 
    /** INITIALIZATION **/
-  const [verifiedMemberData, setVerifiedMemberData] = useState<Member | null>(
-    null
-  );
+  const [verifiedMemberData, setVerifiedMemberData] = useState<Member | null>(null);
   const [path, setPath] = useState();
   const main_path = window.location.pathname;
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
-
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -107,7 +103,7 @@ function App() {
       verifiedMemberData={verifiedMemberData}
       />
       ) : ( 
-      <NavbarOther setPath={setPath} 
+      <NavbarOthers setPath={setPath} 
       handleLoginOpen={handleLoginOpen}
       handleSignUpOpen={handleSignUpOpen}
       anchorEl={anchorEl}
