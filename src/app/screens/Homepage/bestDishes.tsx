@@ -37,7 +37,7 @@ export function BestDishes() {
     useEffect(() => {
         const productService = new ProductApiService();
         productService.getTargetProducts({ order: "product_likes", page: 1, limit: 4 })
-            .then((data => { setTrendProducts(data) }))
+            .then((data => { setTrendProducts([data]) }))
             .catch(err => console.log(err))
     }, []);
 

@@ -18,7 +18,7 @@ class MemberApiService {
                 withCredentials: true,
             })
 
-            // console.log("state:", result.data.state);
+            console.log("state:", result.data.state);
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state != 'fail', result?.data?.message);
 
@@ -37,7 +37,7 @@ class MemberApiService {
                 withCredentials: true,
             })
 
-            // console.log("state:", result.data.state);
+            console.log("state:", result.data.state);
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state != 'fail', result?.data?.message);
 
@@ -60,6 +60,8 @@ class MemberApiService {
             // if (!cookie.get("access_token")) {
             //     localStorage.removeItem("member_data");
             // }
+
+            console.log("state:", result.data.state);
 
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);

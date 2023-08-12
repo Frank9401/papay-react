@@ -3,7 +3,19 @@ import Button from "@mui/material/Button";
 import TabPanel from '@material-ui/lab/TabPanel';
 import moment from "moment";
 
-const processOrders = [
+import { createSelector } from "@reduxjs/toolkit";
+import { retrieveProcessOrders } from "../../screens/OrdersPage/selector";
+import { useSelector } from "react-redux";
+
+const processOrdersRetriever = createSelector(
+    retrieveProcessOrders,
+    (processOrders) => ({
+        processOrders
+    })
+);
+
+
+const processOrdersTest = [
     [1, 2, 3],
     [1, 2, 3],
     [1, 2, 3]
@@ -12,19 +24,20 @@ const processOrders = [
 const currentDate = moment().format('YY-MM-DD HH:mm');
 
 export default function ProcessOrders(props: any) {
+    const { processOrders } = useSelector(processOrdersRetriever);
     return (
         <TabPanel value="2">
             <Stack>
-                {processOrders?.map((order) => {
+                {processOrdersTest.map((order) => {
                     return (
                         <Box className="order_main_box">
                             <Box className="order_box_scroll">
                                 {order.map((item) => {
-                                    const img_path = `others/qovurma.jpg`
+                                    const img_path = `others/stake.jpg`
                                     return (
                                         <Box className="ordersName_price">
                                             <img className="orderDishImg" src={img_path} alt="" />
-                                            <p className="titleDish">Qovurma</p>
+                                            <p className="titleDish">Stake</p>
                                             <Box className="priceBox">
                                                 <p>$7</p>
                                                 <img src="/icons/Close.svg" alt="" />

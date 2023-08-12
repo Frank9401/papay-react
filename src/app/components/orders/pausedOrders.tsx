@@ -1,26 +1,40 @@
 import { Box, Stack } from "@mui/material";
 import Button from "@mui/material/Button";
 import TabPanel from '@material-ui/lab/TabPanel';
+import { createSelector } from "@reduxjs/toolkit";
+import { retrievePausedOrders } from "../../screens/OrdersPage/selector";
+import { useSelector } from "react-redux";
 
-const pausedOrders = [
+
+const pausedOrdersRetriever = createSelector(
+    retrievePausedOrders,
+    (pausedOrders) => ({
+        pausedOrders
+    })
+);
+
+
+const pausedOrdersTest = [
     [1, 2, 3],
     [1, 2, 3],
     [1, 2, 3]
 ]
 export default function PausedOrders(props: any) {
+    /** INITIALIZATIONS */
+    const { pausedOrders } = useSelector(pausedOrdersRetriever);
     return (
         <TabPanel value="1">
             <Stack>
-                {pausedOrders?.map((order) => {
+                {pausedOrdersTest.map((order) => {
                     return (
                         <Box className="order_main_box">
                             <Box className="order_box_scroll">
                                 {order.map((item) => {
-                                    const img_path = `others/qovurma.jpg`
+                                    const img_path = `others/stake.jpg`
                                     return (
                                         <Box className="ordersName_price">
                                             <img className="orderDishImg" src={img_path} alt="" />
-                                            <p className="titleDish">Qovurma</p>
+                                            <p className="titleDish">Stake</p>
                                             <Box className="priceBox">
                                                 <p>$7</p>
                                                 <img src="/icons/Close.svg" alt="" />
@@ -43,8 +57,8 @@ export default function PausedOrders(props: any) {
                                     <p>jami narx</p>
                                     <p>$23</p>
 
-                                    <Button variant="contained" sx={{mx:"25px"}} style={{borderRadius: "10px"}} color="primary">Bekor Qilish</Button>
-                                    <Button variant="contained" style={{borderRadius: "10px"}} color="secondary">To'lash</Button>
+                                    <Button variant="contained" sx={{ mx: "25px" }} style={{ borderRadius: "10px" }} color="primary">Bekor Qilish</Button>
+                                    <Button variant="contained" style={{ borderRadius: "10px" }} color="secondary">To'lash</Button>
 
                                 </Box>
                             </Box>

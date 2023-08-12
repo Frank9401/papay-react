@@ -7,6 +7,7 @@ const initialState: RestaurantPageState = {
   chosenRestaurant: null,
   targetProducts: [],
   chosenProduct: null,
+  randomRestaurants: undefined
 };
 
 const restaurantPageSlice = createSlice({
@@ -16,7 +17,7 @@ const restaurantPageSlice = createSlice({
     setTargetRestaurants: (state, action) => {
       state.targetRestaurants = action.payload;
     },
-    setRandomRestaurant: (state, action) => {
+    setRandomRestaurants: (state, action) => {
       state.randomRestaurant = action.payload;
     },
     setChosenRestaurant: (state, action) => {
@@ -33,7 +34,7 @@ const restaurantPageSlice = createSlice({
 
 export const {
   setTargetRestaurants,
-  setRandomRestaurant,
+  setRandomRestaurants,
   setChosenRestaurant,
   setTargetProducts,
   setChosenProduct,

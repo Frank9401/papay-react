@@ -25,6 +25,8 @@ import { Definer } from "../lib/Definer";
 import assert from "assert";
 import MemberApiService from "./apiServices/memberApiService";
 import "../app/apiServices/verify";
+import { CartItem } from "../types/others";
+import { Product } from "../types/product";
 
 
 function App() {
@@ -37,6 +39,11 @@ function App() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  const cartJson: any = localStorage.getItem("cart_data");
+  const current_cart: CartItem[] = JSON.parse(cartJson) ?? [];
+  const [cartItems, setCartItems] = useState<CartItem[]>(current_cart);
+
 
   useEffect(() => {
     console.log("=== useEFFECT: APP===");
@@ -78,6 +85,70 @@ function App() {
     }
   };
 
+  const onAdd = (product: Product) => {
+    const exist: any = cartItems.find(
+      (item: CartItem) => item._id === product._id
+    );
+    if (exist) {
+      const cart_updated = cartItems.map((item: CartItem) =>
+        item._id === product._id
+          ? { ...exist, quantity: exist.quantity + 1 }
+          : item
+      );
+      setCartItems(cart_updated);
+      localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+    } else {
+      const new_item: CartItem = {
+        _id: product._id,
+        quantity: 1,
+        name: product.product_name,
+        price: product.product_price,
+        image: product.product_images[0],
+      };
+      const cart_updated = [...cartItems, { ...new_item }];
+      setCartItems(cart_updated);
+      localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+    }
+  };
+
+  const onRemove = (item: CartItem) => {
+    const item_data: any = cartItems.find(
+      (ele: CartItem) => ele._id === item._id
+    );
+
+    if (item_data.quantity === 1) {
+      const cart_updated = cartItems.filter(
+        (ele: CartItem) => ele._id !== item._id
+      );
+
+      setCartItems(cart_updated);
+      localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+    } else {
+      const cart_updated = cartItems.map((ele: CartItem) =>
+        ele._id === item._id
+          ? { ...item_data, quantity: item_data.quantity - 1 }
+          : ele
+      );
+      setCartItems(cart_updated);
+      localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+    }
+  };
+
+  const onDeleteAll = () => {
+    setCartItems([]);
+    localStorage.removeItem("cart_data");
+  };
+
+  const onDelete = (item: CartItem) => {
+    const cart_updated = cartItems.filter(
+      (ele: CartItem) => ele._id !== item._id
+    );
+
+    setCartItems(cart_updated);
+    localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+  };  
+
+
   return (
     <Router>
       {main_path ==='/' ? 
@@ -90,6 +161,13 @@ function App() {
       handleCloseLogOut={handleCloseLogOut}
       handleLogOutRequest={handleLogOutRequest}
       verifiedMemberData={verifiedMemberData}
+
+      cartItems={cartItems}
+      onAdd={onAdd}
+      onRemove = {onRemove}
+      onDelete = {onDelete}
+
+      onDeleteAll={onDeleteAll}
 />
       : main_path.includes ("/restaurant") ? (
       <NavbarRestaurant setPath={setPath} 
@@ -101,6 +179,13 @@ function App() {
       handleCloseLogOut={handleCloseLogOut}
       handleLogOutRequest={handleLogOutRequest}
       verifiedMemberData={verifiedMemberData}
+
+      cartItems={cartItems}
+          onAdd={onAdd}
+
+          onRemove = {onRemove}
+          onDelete = {onDelete}
+          onDeleteAll={onDeleteAll}
       />
       ) : ( 
       <NavbarOthers setPath={setPath} 
@@ -118,7 +203,7 @@ function App() {
         
         <Switch>
           <Route path="/restaurant">
-            <RestaurantPage />
+            <RestaurantPage  onAdd={onAdd} />
           </Route>
           <Route path="/community">
             <CommunityPage />

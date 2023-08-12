@@ -9,6 +9,7 @@ import { Product } from "../../types/product";
 
 class ProductApiService {
     private readonly path: string;
+   getChosenDish: any;
     constructor() {
         this.path = serviceApi;
     }
@@ -17,9 +18,12 @@ class ProductApiService {
         try {
             const url = `/products`,
                 result = await axios.post(this.path + url, data, { withCredentials: true })
-            assert.ok(result, Definer.general_err1);
-            console.log('state:', result.data.state);
-            const products: Product[] = result.data.data;
+               
+                console.log("state:", result.data.state);
+                assert.ok(result, Definer.general_err1);
+                assert.ok(result?.data?.state != 'fail', result?.data?.message);
+            
+            const products: Product = result.data.data;
             return products;
         } catch (error: any) {
             console.log(`ERROR::: getTargetProducts ${error.message}`);

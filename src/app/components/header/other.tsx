@@ -1,17 +1,8 @@
 import React from "react";
-import {
-   Container, 
-   Stack, 
-   Box, 
-   Button, 
-   IconButton, 
-   Badge, 
-   MenuItem, 
-   ListItemIcon, 
-   Menu 
-  } from "@mui/material";
+import { Container, Stack, Box, Button, IconButton, Badge, MenuItem, ListItemIcon, Menu } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { Logout } from "@mui/icons-material";
+import Basket from "./basket";
 
 
 export function NavbarOthers(props: any) {
@@ -32,11 +23,14 @@ export function NavbarOthers(props: any) {
                             Oshhona
                         </NavLink>
                     </Box>
-                    <Box className="hover-line" onClick={props.setPath}>
-                        <NavLink to={"/orders"} activeClassName="underline">
-                            Buyurtma
-                        </NavLink>
-                    </Box>
+                    {props.verifiedMemberData ?
+                        <Box className="hover-line" onClick={props.setPath}>
+                            <NavLink to={"/orders"} activeClassName="underline">
+                                Buyurtma
+                            </NavLink>
+                        </Box> :
+                        null
+                    }
                     <Box className="hover-line" onClick={props.setPath}>
                         <NavLink to={"/community"} activeClassName="underline">
                             Jamiyat
@@ -55,14 +49,12 @@ export function NavbarOthers(props: any) {
                             Yordam
                         </NavLink>
                     </Box>
-                    <Box className="hover-line">
-                        <IconButton aria-label="cart" id="basic-button" aria-controls={undefined} aria-haspopup="true" aria-expanded={undefined}>
-                            <Badge badgeContent={3} color="secondary">
-                                <img src={"/icons/shopping_cart.svg"} alt="" />
-                            </Badge>
-                        </IconButton>
-                    </Box>
-
+                    <Basket cartItems={props.cartItems}
+                        onAdd={props.onAdd}
+                        onRemove={props.onRemove}
+                        onDelete={props.onDelete}
+                        onDeleteAll={props.onDeleteAll}
+                    />
                     {!props.verifiedMemberData ?
                         <Box >
                             <Button variant="contained"

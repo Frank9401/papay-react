@@ -5,6 +5,7 @@ export interface MeLiked {
 }
 
 export interface Product {
+    me_liked: any;
     _id : string;
     product_name: string;
     product_collection: string;

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Box, Button, Container, Stack } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Dispatch } from "@reduxjs/toolkit";
+import { Box, Container, Stack } from "@mui/material";
 import "../../../css/orders.css"
 import Tab from '@material-ui/core/Tab';
 import TabContext from '@material-ui/lab/TabContext';
@@ -9,19 +10,33 @@ import FinishedOrders from "../../components/orders/finishedOrders";
 import PausedOrders from "../../components/orders/pausedOrders";
 import Marginer from "../../components/marginer";
 import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
+import { useDispatch } from "react-redux";
+import { setPauseOrders } from "./slice";
+import { setProcessOrders } from "./slice";
+import { setFinishedOrders } from "./slice";
+import { Order } from "../../../types/orders";
 
 
+
+
+/** Redux Slice */
+const actionDispatch = (dispatch: Dispatch) => ({
+    setPauseOrders: (data: Order[]) => dispatch(setPauseOrders(data)),
+    setProcessOrders: (data: Order) => dispatch(setProcessOrders(data)),
+    setFinishedOrders: (data: Order[]) => dispatch(setFinishedOrders(data)),
+});
 
 export function OrdersPage() {
-    /**INITIALIZATION  */
+    /** INITIALIZATIONS */
+    const { setPauseOrders, setProcessOrders, setFinishedOrders }
+        = actionDispatch(useDispatch());
+
     const [value, setValue] = useState("1");
-    console.log("PASSED HERE");
-    console.log("value", value);
+    useEffect(() => {
 
-
-    /***HANDLERS */
+    }, [])
+    /** HANDLERS */
     const handleChange = (event: any, newValue: string) => {
-        console.log("newValue", newValue);
         setValue(newValue);
     }
     return (
@@ -63,17 +78,17 @@ export function OrdersPage() {
                                     <img src="http://papays.uz/icons/user_icon.svg" className="order_user_prof_img" alt="" />
                                 </Box>
                             </Box>
-                            <span className="order_user_name">Frank</span>
+                            <span className="order_user_name">Jack</span>
                             <span className="order_user_prof">User</span>
-                            <Box sx={{width:"250%", marginTop:"40px", marginBottom:"8px"}}>
-                            <Marginer
-                                direction="horizontal"
-                                height="3"
-                                width="200%"
-                                bg="grey"
-                            />
+                            <Box sx={{ width: "250%", marginTop: "40px", marginBottom: "8px" }}>
+                                <Marginer
+                                    direction="horizontal"
+                                    height="3"
+                                    width="200%"
+                                    bg="grey"
+                                />
                             </Box>
-                           
+
                             <Stack className="order_user_address">
                                 <Box sx={{ display: "flex" }}>
                                     <LocationOnRoundedIcon />
