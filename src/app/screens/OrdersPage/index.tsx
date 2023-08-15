@@ -15,6 +15,9 @@ import { setPauseOrders } from "./slice";
 import { setProcessOrders } from "./slice";
 import { setFinishedOrders } from "./slice";
 import { Order } from "../../../types/orders";
+import OrderApiService from "../../apiServices/orderApiService";
+import { verifyMemberData } from "../../apiServices/verify";
+import { Member } from "../../../types/user";
 
 
 
@@ -26,15 +29,28 @@ const actionDispatch = (dispatch: Dispatch) => ({
     setFinishedOrders: (data: Order[]) => dispatch(setFinishedOrders(data)),
 });
 
-export function OrdersPage() {
+export function OrdersPage(props: any ) {
     /** INITIALIZATIONS */
     const { setPauseOrders, setProcessOrders, setFinishedOrders }
         = actionDispatch(useDispatch());
+        const verifiedMemberData: Member | null = props.verifiedMemberData;
 
     const [value, setValue] = useState("1");
     useEffect(() => {
 
-    }, [])
+        const orderService = new OrderApiService();
+        orderService.getMyOrders('paused')
+            .then(data => setPauseOrders(data)).catch(err => console.log(err)
+            );
+        orderService.getMyOrders('process')
+            .then(data => setProcessOrders(data)).catch(err => console.log(err)
+            );
+        orderService.getMyOrders('finished')
+            .then(data => setFinishedOrders(data)).catch(err => console.log(err)
+            );
+    }, [props.orderRebuild])
+
+   
     /** HANDLERS */
     const handleChange = (event: any, newValue: string) => {
         setValue(newValue);
@@ -62,9 +78,9 @@ export function OrdersPage() {
                             </Box>
                         </Box>
                         <Stack className="order_main_content">
-                            <PausedOrders />
-                            <ProcessOrders />
-                            <FinishedOrders />
+                            <PausedOrders setOrderRebuild={props.setOrderRebuild} />
+                            <ProcessOrders setOrderRebuild={props.setOrderRebuild} />
+                            <FinishedOrders setOrderRebuild={props.setOrderRebuild} />
                         </Stack>
                     </TabContext>
                 </Stack>
@@ -73,13 +89,14 @@ export function OrdersPage() {
                     <Stack className="order_info_box">
                         <Stack sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <Box className="order_user_img">
+                            <img src={verifiedMemberData?.mb_image} className="order_user_avatar" alt="" />
                                 <img src="http://papays.uz/auth/default_user.svg" className="order_user_avatar" alt="" />
                                 <Box className="order_user_icon_box">
                                     <img src="http://papays.uz/icons/user_icon.svg" className="order_user_prof_img" alt="" />
                                 </Box>
                             </Box>
-                            <span className="order_user_name">Jack</span>
-                            <span className="order_user_prof">User</span>
+                            <span className="order_user_name">{verifiedMemberData?.mb_nick}</span>
+                            <span className="order_user_prof">{verifiedMemberData?.mb_type ?? "Foydalanuvchi"}</span>
                             <Box sx={{ width: "250%", marginTop: "40px", marginBottom: "8px" }}>
                                 <Marginer
                                     direction="horizontal"
@@ -89,21 +106,21 @@ export function OrdersPage() {
                                 />
                             </Box>
 
-                            <Stack className="order_user_address">
-                                <Box sx={{ display: "flex" }}>
-                                    <LocationOnRoundedIcon />
-                                </Box>
-                                <Box className="spec_address_text">Busan,Korea</Box>
+                            </Stack>
+                        <Stack className="order_user_address">
+                            <Box sx={{ display: "flex" }}>
+                                <LocationOnRoundedIcon />
+                            </Box>
+                            <Box className="spec_address_text">{verifiedMemberData?.mb_address ?? 'Manzil kiritilmagan'}</Box>
                             </Stack>
                         </Stack>
-                    </Stack>
                     <Stack className="order_info_box">
-                        <input className="card_input" type="text" name="card_number" placeholder="Card number: 1234 7456 5678 9012" />
+                        <input className="card_input" type="text" name="card_number" placeholder="Card number: 1234 5678 9123 5896" />
                         <Stack sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                            <input type="text" name="card_period" placeholder="07 / 24" className="card_half_input" />
-                            <input type="text" name="card_cvv" placeholder="CVV : 013" className="card_half_input" />
+                            <input type="text" name="card_period" placeholder="12 / 27" className="card_half_input" />
+                            <input type="text" name="card_cvv" placeholder="CVV : 198" className="card_half_input" />
                         </Stack>
-                        <input type="text" name="card_creator" placeholder="Javokhirbek Eshboltaev" className="card_input" />
+                        <input type="text" name="card_creator" placeholder="Frank" className="card_input" />
                         <Stack className="card_box">
                             <img src="/icons/western-union.svg" alt="1" />
                             <img src="http://papays.uz/icons/master_card.svg" alt="2" />

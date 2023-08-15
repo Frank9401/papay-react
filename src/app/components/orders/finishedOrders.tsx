@@ -6,6 +6,8 @@ import moment from "moment";
 import { createSelector } from "@reduxjs/toolkit";
 import { retrieveFinishedOrders } from "../../screens/OrdersPage/selector";
 import { useSelector } from "react-redux";
+import { serviceApi } from "../../../lib/config";
+import { Product } from "../../../types/product";
 
 const finishedOrdersRetriever = createSelector(
     retrieveFinishedOrders,
@@ -15,11 +17,6 @@ const finishedOrdersRetriever = createSelector(
 );
 
 
-const finishedOrdersTest = [
-    [1, 2, 3],
-    [1, 2, 3],
-    [1, 2, 3]
-]
 
 export default function FinishedOrders(props: any) {
     const { finishedOrders } = useSelector(finishedOrdersRetriever);
@@ -27,22 +24,23 @@ export default function FinishedOrders(props: any) {
     return (
         <TabPanel value="3">
             <Stack>
-                {finishedOrdersTest.map((order) => {
+                {finishedOrders.map((order) => {
                     return (
                         <Box className="order_main_box">
                             <Box className="order_box_scroll">
-                                {order.map((item) => {
-                                    const img_path = `others/stake.jpg`
+                                {order.order_items.map((item) => {
+                                    const product: Product = order.product_data.filter((ele: { _id: any; }) => ele._id === item.product_id)[0];
+                                    const image_path = `${serviceApi}/${product.product_images[0]}`
                                     return (
                                         <Box className="ordersName_price">
-                                            <img className="orderDishImg" src={img_path} alt="" />
+                                            <img className="orderDishImg" src={image_path} alt="" />
                                             <p className="titleDish">Stake</p>
                                             <Box className="priceBox">
-                                                <p>$7</p>
+                                                <p>${item.item_price}</p>
                                                 <img src="/icons/Close.svg" alt="" />
-                                                <p>3</p>
+                                                <p>{item.item_quantity}</p>
                                                 <img src="/icons/Pause.svg" alt="" />
-                                                <p style={{ marginLeft: "15px" }}>$21</p>
+                                                <p style={{ marginLeft: "15px" }}>${item.item_price * item.item_quantity}</p>
                                             </Box>
                                         </Box>
                                     )
@@ -51,13 +49,14 @@ export default function FinishedOrders(props: any) {
                             <Box className="total_price_box red_solid">
                                 <Box className="boxTotal">
                                     <p>mahuslot narxi </p>
-                                    <p>$21</p>
+                                    <p>${order.order_total_amount - order.order_delivery_cost}</p>
                                     <img src="/icons/Plus.svg" style={{ marginLeft: "20px" }} alt="" />
                                     <p>yetkazish xizmati </p>
-                                    <p>$2</p>
+                                    <p>${order.order_delivery_cost}</p>
                                     <img src="/icons/Pause.svg" style={{ marginLeft: "20px" }} alt="" />
-                                    <p>Jami narx</p>
-                                    <p>$23</p>
+                                    <p>jami narx</p>
+                                    <p>${order.order_total_amount}</p>
+
                                 </Box>
                             </Box>
                         </Box>

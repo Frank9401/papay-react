@@ -10,12 +10,7 @@ const initialState: HomePageState = {
     bestBoArticles: [],
     trendBoArticles: [],
     newsBoArticles: [],
-    topRestaurant: [],
-    bestRestaurant: [],
-    trendProduct: [],
-    bestBoArticle: [],
-    trendBoArticle: [],
-    newsBoArticle: []
+   
 }
 
 const HomePageSlice = createSlice({

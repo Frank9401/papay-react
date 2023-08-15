@@ -3,47 +3,43 @@ import { Order } from "./orders";
 import { Product } from "./product";
 import { Restaurant } from "./user";
 
-
-/** REACT APP STATE **/
-export interface AppRootState{
-    ordersPage: any;
-    homePage : HomePageState;
+export interface AppRootState {
+    homePage: HomePageState;
     restaurantPage: RestaurantPageState;
+    ordersPage: OrdersPageState;
+    communityPage: CommunityPageState
 }
 
+/** HOMEPAGE */
 export interface HomePageState {
-    topRestaurants?: Restaurant[];
-    bestRestaurants?: Restaurant[];
-    trendProducts?: Product[];
-    bestBoArticles?: BoArticles[];
-    trendBoArticles?: BoArticles[];
-    newsBoArticles?: BoArticles[]
+    topRestaurants: Restaurant[];
+    bestRestaurants: Restaurant[];
+    trendProducts: Product[];
+    bestBoArticles: BoArticles[];
+    trendBoArticles: BoArticles[];
+    newsBoArticles: BoArticles[]
 }
 
-/** HOME PAGE **/
-export interface HomePageState {
-    topRestaurant: Restaurant[];
-    bestRestaurant: Restaurant[];
-    trendProduct: Product[];
-    bestBoArticle: BoArticles[];
-    trendBoArticle: BoArticles[];
-    newsBoArticle: BoArticles[];
-  }
-  
-  /** RESTAURANT PAGE **/
-  export interface RestaurantPageState {
-    randomRestaurants: any;
+/** RESTAURANT PAGE */
+
+export interface RestaurantPageState {
     targetRestaurants: Restaurant[];
-    randomRestaurant: Restaurant[];
+    randomRestaurants: Restaurant[];
     chosenRestaurant: Restaurant | null;
     targetProducts: Product[];
     chosenProduct: Product | null;
-  };
+}
 
-  /** ORDERS PAGE */
+/** ORDERS PAGE */
 
 export interface OrdersPageState {
-  pausedOrders: Order[],
-  processOrders: Order[],
-  finishedOrders: Order[],
+    pausedOrders: Order[],
+    processOrders: Order[],
+    finishedOrders: Order[],
+}
+
+/** CoMMUNITY PAGE */
+
+export interface CommunityPageState {
+    targetBoArticles: BoArticles[]
 }

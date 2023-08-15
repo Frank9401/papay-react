@@ -56,6 +56,7 @@ export function NavbarRestaurant(props: any) {
                         onRemove={props.onRemove}
                         onDelete={props.onDelete}
                         onDeleteAll={props.onDeleteAll}
+                        setOrderRebuild={props.setOrderRebuild}
                     />
 
 
