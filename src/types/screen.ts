@@ -1,13 +1,15 @@
 import { BoArticles } from "./boArticle";
+import { Follower, Following } from "./follow";
 import { Order } from "./orders";
 import { Product } from "./product";
-import { Restaurant } from "./user";
+import { Member, Restaurant } from "./user";
 
 export interface AppRootState {
     homePage: HomePageState;
     restaurantPage: RestaurantPageState;
     ordersPage: OrdersPageState;
     communityPage: CommunityPageState
+    memberPage: MemberPageState
 }
 
 /** HOMEPAGE */
@@ -42,4 +44,13 @@ export interface OrdersPageState {
 
 export interface CommunityPageState {
     targetBoArticles: BoArticles[]
+}
+
+
+export interface MemberPageState {
+    chosenMember: Member | null;
+    chosenMemberBoArticles: BoArticles[];
+    chosenSingleBoArticles: BoArticles | null;
+    memberFollowers: Follower[];
+    memberFollowings: Following[];
 }

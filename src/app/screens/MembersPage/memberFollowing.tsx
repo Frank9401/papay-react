@@ -1,11 +1,39 @@
 import { Avatar, Box, Button, Stack } from "@mui/material"
 
+//Redux 
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
+import { setMemberFollowings } from "./slice";
+import { retrieveMemberFollowings } from "./selector";
+import { Following } from "../../../types/follow";
+
+
+
+
+/** Redux Slice */
+const actionDispatch = (dispatch: Dispatch) => ({
+    setMemberFollowings: (data: Following[]) => dispatch(setMemberFollowings(data))
+});
+
+/** Redux Selector */
+const memberFollowingsRetriever = createSelector(
+    retrieveMemberFollowings,
+    (memberFollowings) => ({
+        memberFollowings
+    })
+);
+
 const followings = [
-    { mb_nick: "Bohodir"},
+    { mb_nick: "Akbar"},
     { mb_nick: "Baron"},
-    { mb_nick: "Aron"},
+    { mb_nick: "Botir"},
 ]
 export function MemberFollowing(props: any) {
+    const { setMemberFollowings } = actionDispatch(useDispatch());
+    const { memberFollowings } = useSelector(memberFollowingsRetriever);
+
+    
     return (
         <Stack>
             {followings.map((following) => {
