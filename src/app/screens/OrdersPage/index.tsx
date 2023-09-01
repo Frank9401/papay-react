@@ -16,7 +16,7 @@ import { setProcessOrders } from "./slice";
 import { setFinishedOrders } from "./slice";
 import { Order } from "../../../types/orders";
 import OrderApiService from "../../apiServices/orderApiService";
-import { verifyMemberData } from "../../apiServices/verify";
+import { verifiedMemberData } from "../../apiServices/verify";
 import { Member } from "../../../types/user";
 
 

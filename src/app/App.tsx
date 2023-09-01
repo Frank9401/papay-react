@@ -1,9 +1,8 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../css/App.css';
 import '../css/navbar.css'
 import '../css/footer.css'
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
-import { RippleBadge } from './MaterialTheme/styled';
+
 
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { RestaurantPage } from './screens/RestaurantPage';
@@ -18,8 +17,6 @@ import { NavbarRestaurant } from './components/header/restaurant';
 import { NavbarOthers } from './components/header/other';
 import { Footer } from './components/footer';
 import AuthenticationModal from './components/auth';
-import { Member } from '../types/user';
-import { serviceApi } from '../lib/config';
 import { sweetFailureProvider, sweetTopSmallSuccessAlert } from '../lib/sweetAlert';
 import { Definer } from '../lib/Definer';
 import MemberApiService from './apiServices/memberApiService';
@@ -31,39 +28,27 @@ import { Product } from '../types/product';
 
 function App() {
     /** INITIALIZATIONS */
-    const [verifiedMemberData, setVerifiedMemberData] = useState<Member | null>(null)
     const [path, setPath] = useState();
     const main_path = window.location.pathname;
-    const [signUpOpen, setSignUpOpen] = useState(false);
-    const [orderRebuild, setOrderRebuild] = useState<Date>(new Date());
 
+    const [signUpOpen, setSignUpOpen] = useState(false);
     const [loginOpen, setLoginOpen] = useState(false);
+
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    const [orderRebuild, setOrderRebuild] = useState<Date>(new Date());
 
     const cartJson: any = localStorage.getItem("cart_data");
     const current_cart: CartItem[] = JSON.parse(cartJson) ?? [];
     const [cartItems, setCartItems] = useState<CartItem[]>(current_cart);
 
-    useEffect(() => {
-        console.log("===useEffect: App ===");
-        const memberDataJson: any = localStorage.getItem("member_data")
-            ? localStorage.getItem("member_data")
-            : null;
-        const member_data = memberDataJson ? JSON.parse(memberDataJson) : null;
-        if (member_data) {
-            member_data.mb_image = member_data.mb_image
-                ? `${serviceApi}/${member_data.mb_image}`
-                : "/auth/default_user.svg";
-            setVerifiedMemberData(member_data);
-        }
-    }, [signUpOpen, loginOpen]);
+
 
     /** HANDLERS */
-    const handleSignUpOpen = () => { setSignUpOpen(true) }
-    const handleSignUpClose = () => { setSignUpOpen(false) }
-    const handleLoginOpen = () => { setLoginOpen(true) }
-    const handleLoginClose = () => { setLoginOpen(false) }
+    const handleSignUpOpen = () => { setSignUpOpen(true) };
+    const handleSignUpClose = () => { setSignUpOpen(false) };
+    const handleLoginOpen = () => { setLoginOpen(true) };
+    const handleLoginClose = () => { setLoginOpen(false) };
 
     const handleLogOutClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -72,7 +57,7 @@ function App() {
         setAnchorEl(null);
     };
 
-    const handleLogoutRequest = async () => {
+    const handleLogOutRequest = async () => {
         try {
             const memberApiService = new MemberApiService();
             await memberApiService.logOutRequest();
@@ -139,7 +124,7 @@ function App() {
     }
     return (
         <Router>
-            {main_path === "/" ?
+            {main_path == "/" ?
                 <NavbarHome
                     setPath={setPath}
                     handleSignUpOpen={handleSignUpOpen}
@@ -148,8 +133,7 @@ function App() {
                     open={open}
                     handleLogOutClick={handleLogOutClick}
                     handleCloseLogOut={handleCloseLogOut}
-                    handleLogoutRequest={handleLogoutRequest}
-                    verifiedMemberData={verifiedMemberData}
+                    handleLogoutRequest={handleLogOutRequest}
                     cartItems={cartItems}
                     onAdd={onAdd}
                     onRemove={onRemove}
@@ -161,14 +145,14 @@ function App() {
                 main_path.includes("/restaurant")
                     ?
                     <NavbarRestaurant
+                        setPath={setPath}
                         handleSignUpOpen={handleSignUpOpen}
                         handleLoginOpen={handleLoginOpen}
-                        verifiedMemberData={verifiedMemberData}
                         anchorEl={anchorEl}
                         open={open}
                         handleLogOutClick={handleLogOutClick}
                         handleCloseLogOut={handleCloseLogOut}
-                        handleLogoutRequest={handleLogoutRequest}
+                        handleLogoutRequest={handleLogOutRequest}
                         cartItems={cartItems}
                         onAdd={onAdd}
                         onRemove={onRemove}
@@ -179,14 +163,14 @@ function App() {
                     />
                     :
                     <NavbarOthers
+                        setPath={setPath}
                         handleSignUpOpen={handleSignUpOpen}
                         handleLoginOpen={handleLoginOpen}
-                        verifiedMemberData={verifiedMemberData}
                         anchorEl={anchorEl}
                         open={open}
                         handleLogOutClick={handleLogOutClick}
                         handleCloseLogOut={handleCloseLogOut}
-                        handleLogoutRequest={handleLogoutRequest}
+                        handleLogoutRequest={handleLogOutRequest}
                         cartItems={cartItems}
                         onAdd={onAdd}
                         onRemove={onRemove}
@@ -206,11 +190,10 @@ function App() {
                     <OrdersPage
                         orderRebuild={orderRebuild}
                         setOrderRebuild={setOrderRebuild}
-                        verifiedMemberData={verifiedMemberData}
                     />
                 </Route>
                 <Route path="/member-page">
-                <MemberPage verifiedMemberData={verifiedMemberData} />
+                    <MemberPage />
                 </Route>
                 <Route path="/help">
                     <HelpPage />

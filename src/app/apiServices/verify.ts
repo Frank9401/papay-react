@@ -1,23 +1,27 @@
-import Cookie from "universal-cookie";
+import Cookies from "universal-cookie";
+import { serviceApi } from "../../lib/config";
 
-const cookie = new Cookie();
-let member_data :any =null;
+const cookies = new Cookies();
+let member_data: any = null;
 
-if(cookie.get("access_token")){
-    const memberDataJson :any = localStorage.getItem("member_data")
-    ? localStorage.getItem("member_data")
-    : null;
-    member_data = memberDataJson?JSON.parse(memberDataJson): null;
-}else{
+
+if (cookies.get("access_token")) {
+    const memberDataJson: any = localStorage.getItem("member_data")
+        ? localStorage.getItem("member_data")
+        : null;
+    member_data = memberDataJson ? JSON.parse(memberDataJson) : null;
+
+    if (member_data) {
+        member_data.mb_image = member_data.mb_image
+            ? `${serviceApi}/${member_data.mb_image}`
+            : "/auth/default_user.svg";
+    }
+
+} else {
     localStorage.removeItem("member_data");
-
 }
 
-console.log('==verify==');
-console.log(member_data);
+// console.log("== verify ==");
+// console.log(member_data);
 
-export const verifyMemberData = member_data ? member_data : null;
-
-if (!cookie.get("access_token")) {
-    localStorage.removeItem("member_data")
-}
+export const verifiedMemberData = member_data ? member_data : null;
