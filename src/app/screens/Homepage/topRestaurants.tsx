@@ -1,6 +1,6 @@
 import { Box, Container } from "@mui/material";
 import { Stack } from "@mui/system";
-import React from "react";
+import React, { useRef } from "react";
 import Card from "@mui/joy/Card";
 import CardCover from "@mui/joy/CardCover";
 import CardContent from "@mui/joy/CardContent";
@@ -10,14 +10,19 @@ import { CssVarsProvider } from "@mui/joy/styles";
 import { CardOverflow, IconButton } from "@mui/joy";
 import { Favorite } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-
-//Redux 
+//Redux
 import { useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
 import { retrieveTopRestaurants } from "../../screens/Homepage/selector";
 import { Restaurant } from "../../../types/user";
-import { serviceApi } from "../../../lib/config";
 
+import { serviceApi } from "../../../lib/config";
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+import assert from "assert";
+import { Definer } from "../../../lib/Definer";
+import MemberApiService from "../../apiServices/memberApiService";
+import { useHistory } from "react-router-dom";
+import { verifiedMemberData } from "../../apiServices/verify";
 
 
 /** Redux Selector */
@@ -31,8 +36,44 @@ const topRestaurantRetriever = createSelector(
 export function TopRestaurants() {
   /**INITIALIZATIONS */
   const { topRestaurants } = useSelector(topRestaurantRetriever)
+  const refs: any = useRef([]);
+  const history = useHistory();
 
   console.log("topRestaurants:::", topRestaurants);
+
+  /** HANDLERS */
+  const chosenRestaurantHandler = (id: string) => {
+    // console.log("===history::", history);
+    history.push(`/restaurant/${id}`);
+    // console.log("===afterPushhistory::", history);
+  }
+
+  const targetLikeTop = async (e: any, id: string) => {
+    try {
+      assert.ok(verifiedMemberData, Definer.auth_err1);
+
+      const memberService = new MemberApiService(),
+        like_result: any = await memberService.memberLikeTarget({
+          like_ref_id: id,
+          group_type: "member"
+        });
+      assert.ok(like_result, Definer.general_err1);
+
+
+      if (like_result.like_status > 0) {
+        e.target.style.fill = "red";
+        refs.current[like_result.like_ref_id].innerHTML++;
+      } else {
+        e.target.style.fill = "white";
+        refs.current[like_result.like_ref_id].innerHTML--;
+      }
+
+      await sweetTopSmallSuccessAlert("success", 700, false)
+    } catch (err: any) {
+      console.log("targetLikeTop, ERROR:", err);
+      sweetErrorHandling(err).then();
+    }
+  };
 
   return (
     <div className="top_restaurant_frame">
@@ -43,19 +84,19 @@ export function TopRestaurants() {
           sx={{ mt: "45px" }}
         >
           <Box className="category_title">TOP Restauranlar</Box>
-          <Stack sx={{ mt: "43px" }} flexDirection={"row"} m={"16px"}>
+          <Stack sx={{ mt: "43px", pl: "30px" }} flexDirection={"row"} m={"16px"}>
 
             {topRestaurants?.map((ele: Restaurant) => {
               const image_path = `${serviceApi}/${ele.mb_image}`
               return (
                 <CssVarsProvider key={ele._id}>
                   <Card
+                    onClick={() => chosenRestaurantHandler(ele._id)}
                     sx={{
                       minHeight: 430,
                       minWidth: 325,
                       mr: "35px",
                       cursor: "pointer",
-                      marginLeft: "30px"
                     }}
                   >
                     <CardCover>
@@ -88,6 +129,7 @@ export function TopRestaurants() {
                       }}
                     >
                       <IconButton
+                        onClick={(e) => e.stopPropagation()}
                         aria-label="Like minimal photography"
                         size="md"
                         variant="solid"
@@ -102,11 +144,13 @@ export function TopRestaurants() {
                           color: "rgba(0, 0, 0, .4)",
                         }}
                       >
-                        <Favorite style={{
-                          fill: ele?.me_liked && ele?.me_liked[0]?.my_favorite
-                            ? "red"
-                            : "white"
-                        }} />
+                        <Favorite
+                          onClick={(e) => targetLikeTop(e, ele._id)}
+                          style={{
+                            fill: ele?.me_liked && ele?.me_liked[0]?.my_favorite
+                              ? "red"
+                              : "white"
+                          }} />
                       </IconButton>
 
                       <Typography
@@ -130,7 +174,11 @@ export function TopRestaurants() {
                           display: "flex",
                         }}
                       >
-                        <div>{ele.mb_likes}</div>
+                        <div
+                          ref={(element) => (refs.current[ele._id] = element)}
+                        >
+                          {ele.mb_likes}
+                        </div>
                         <Favorite sx={{ fontSize: 20, marginLeft: "5px" }} />
                       </Typography>
                     </CardOverflow>

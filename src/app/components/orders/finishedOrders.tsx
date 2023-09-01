@@ -18,6 +18,7 @@ const finishedOrdersRetriever = createSelector(
 
 
 
+
 export default function FinishedOrders(props: any) {
     const { finishedOrders } = useSelector(finishedOrdersRetriever);
 
@@ -29,7 +30,7 @@ export default function FinishedOrders(props: any) {
                         <Box className="order_main_box">
                             <Box className="order_box_scroll">
                                 {order.order_items.map((item) => {
-                                    const product: Product = order.product_data.filter((ele: { _id: any; }) => ele._id === item.product_id)[0];
+                                    const product: Product = order.product_data.filter(ele => ele._id === item.product_id)[0];
                                     const image_path = `${serviceApi}/${product.product_images[0]}`
                                     return (
                                         <Box className="ordersName_price">

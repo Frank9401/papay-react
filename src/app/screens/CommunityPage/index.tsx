@@ -15,7 +15,7 @@ import CommunityApiService from "../../apiServices/communityApiService";
 import { BoArticles, SearchArticlesObj } from "../../../types/boArticle";
 
 
-//Redux 
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
@@ -56,8 +56,8 @@ export function CommunityPage(props: any) {
   useEffect(() => {
     const communityService = new CommunityApiService();
     communityService.getTargetArticles(searchArticleObj)
-      .then((data: BoArticles[]) => { setTargetBoArticles(data) })
-      .catch((err: any) => console.log(err))
+      .then(data => { setTargetBoArticles(data) })
+      .catch(err => console.log(err))
   }, [searchArticleObj, articlesRebuild])
 
   // HANDLERS
@@ -128,8 +128,8 @@ export function CommunityPage(props: any) {
 
                 <Box className="article_bott">
                   <Pagination
-                    count={3}
-                    page={1}
+                    count={searchArticleObj.page >= 3 ? searchArticleObj.page + 1 : 3}
+                    page={searchArticleObj.page}
                     renderItem={(item) => (
                       <PaginationItem
                         components={{ previous: ArrowBack, next: ArrowForward }}

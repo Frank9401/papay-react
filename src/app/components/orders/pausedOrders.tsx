@@ -9,6 +9,7 @@ import { serviceApi } from "../../../lib/config";
 import { Product } from "../../../types/product";
 import { sweetErrorHandling, sweetFailureProvider } from "../../../lib/sweetAlert";
 import OrderApiService from "../../apiServices/orderApiService";
+import { verifiedMemberData } from "../../apiServices/verify";
 
 
 const pausedOrdersRetriever = createSelector(
@@ -24,14 +25,13 @@ export default function PausedOrders(props: any) {
     /** INITIALIZATIONS */
     const { pausedOrders } = useSelector(pausedOrdersRetriever);
 
-    
     /** HANDLERS */
     const deleteOrderHandler = async (event: any) => {
         try {
             const order_id = event.target.value;
             const data = { order_id: order_id, order_status: "DELETED" };
 
-            if (!localStorage.getItem("member_data")) {
+            if (!verifiedMemberData) {
                 sweetFailureProvider(`Please Login First`, true);
             }
 
@@ -55,7 +55,7 @@ export default function PausedOrders(props: any) {
             const order_id = event.target.value;
             const data = { order_id: order_id, order_status: "PROCESS" };
 
-            if (!localStorage.getItem("member_data")) {
+            if (!verifiedMemberData) {
                 sweetFailureProvider(`Please Login First`, true);
             }
 
@@ -71,6 +71,7 @@ export default function PausedOrders(props: any) {
             sweetErrorHandling(error).then();
         }
     }
+
     return (
         <TabPanel value="1">
             <Stack>
@@ -78,15 +79,15 @@ export default function PausedOrders(props: any) {
                     return (
                         <Box className="order_main_box">
                             <Box className="order_box_scroll">
-                            {order.order_items.map((item) => {
+                                {order.order_items.map((item) => {
                                     const product: Product = order.product_data.filter(ele => ele._id === item.product_id)[0];
                                     const image_path = `${serviceApi}/${product.product_images[0]}`
                                     return (
                                         <Box className="ordersName_price">
-                                             <img className="orderDishImg" src={image_path} alt="" />
+                                            <img className="orderDishImg" src={image_path} alt="" />
                                             <p className="titleDish">{product.product_name}</p>
                                             <Box className="priceBox">
-                                            <p>${item.item_price}</p>
+                                                <p>${item.item_price}</p>
                                                 <img src="/icons/Close.svg" alt="" />
                                                 <p>{item.item_quantity}</p>
                                                 <img src="/icons/Pause.svg" alt="" />

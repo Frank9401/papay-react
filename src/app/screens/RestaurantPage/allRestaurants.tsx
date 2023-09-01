@@ -12,7 +12,7 @@ import CallIcon from '@mui/icons-material/Call';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 
-//Redux 
+//Redux
 import { retrieveTargetRestaurants } from "../../screens/RestaurantPage/selector";
 import { Restaurant } from "../../../types/user";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,6 +27,7 @@ import { Definer } from "../../../lib/Definer";
 import MemberApiService from "../../apiServices/memberApiService";
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 import { useHistory } from "react-router-dom";
+import { verifiedMemberData } from "../../apiServices/verify";
 
 /** Redux Slice */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -74,7 +75,7 @@ export function AllRestaurants() {
 
     const targetLikeHandler = async (e: any, id: string) => {
         try {
-            assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+            assert.ok(verifiedMemberData, Definer.auth_err1);
 
             const memberService = new MemberApiService(),
                 like_result: any = await memberService.memberLikeTarget({
@@ -134,6 +135,7 @@ export function AllRestaurants() {
                                             <img src={image_path} />
                                         </AspectRatio>
                                         <IconButton
+                                            onClick={(e) => { e.stopPropagation() }}
                                             aria-label="Like miniaml photography"
                                             size="md"
                                             variant="solid"
@@ -158,7 +160,7 @@ export function AllRestaurants() {
                                         </IconButton>
                                     </CardOverflow>
                                     <Typography level="h2" sx={{ fontSize: "md", mt: 2 }} >
-                                        {ele.mb_nick}
+                                        {ele.mb_nick} restaurant
                                     </Typography>
                                     <Typography
                                         level="body2"
