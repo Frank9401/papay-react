@@ -1,6 +1,6 @@
-import { Avatar, Box, Button, Stack } from "@mui/material"
+import { Avatar, Box, Button, Stack } from "@mui/material";
 
-//Redux 
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
@@ -21,32 +21,31 @@ import {
 } from "../../../lib/sweetAlert";
 import { serviceApi } from "../../../lib/config";
 
-
-
 /** Redux Slice */
 const actionDispatch = (dispatch: Dispatch) => ({
-    setMemberFollowings: (data: Following[]) => dispatch(setMemberFollowings(data))
+  setMemberFollowings: (data: Following[]) =>
+    dispatch(setMemberFollowings(data)),
 });
 
 /** Redux Selector */
 const memberFollowingsRetriever = createSelector(
-    retrieveMemberFollowings,
-    (memberFollowings) => ({
-        memberFollowings,
-    })
+  retrieveMemberFollowings,
+  (memberFollowings) => ({
+    memberFollowings,
+  })
 );
 
 const followings = [
-    { mb_nick: "Akbar"},
-    { mb_nick: "Baron"},
-    { mb_nick: "Botir"},
-]
+  { mb_nick: "ravhsan" },
+  { mb_nick: "ulugbek" },
+  { mb_nick: "temur" },
+];
 export function MemberFollowing(props: any) {
-    // INITIALIZATIONS
-    const { mb_id, followRebuild, setFollowRebuild } = props;
-    const { setMemberFollowings } = actionDispatch(useDispatch());
-    const { memberFollowings } = useSelector(memberFollowingsRetriever);
-    const [followingsSearchObj, setFollowingsSearchObj] =
+  // INITIALIZATIONS
+  const { mb_id, followRebuild, setFollowRebuild } = props;
+  const { setMemberFollowings } = actionDispatch(useDispatch());
+  const { memberFollowings } = useSelector(memberFollowingsRetriever);
+  const [followingsSearchObj, setFollowingsSearchObj] =
     useState<FollowSearchObj>({ page: 1, limit: 5, mb_id: props?.mb_id });
 
   useEffect(() => {
