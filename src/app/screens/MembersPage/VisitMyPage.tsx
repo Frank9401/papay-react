@@ -42,6 +42,7 @@ import {
 } from "../../../lib/sweetAlert";
 import CommunityApiService from "../../apiServices/communityApiService";
 import MemberApiService from "../../apiServices/memberApiService";
+import { verifiedMemberData } from "../../apiServices/verify";
 
 /** Redux Slice */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -59,21 +60,23 @@ const chosenMemberRetriever = createSelector(
     chosenMember,
   })
 );
+
 const chosenMemberBoArticlesRetriever = createSelector(
   retrieveChosenMemberBoArticles,
   (chosenMemberBoArticles) => ({
     chosenMemberBoArticles,
   })
 );
+
 const chosenSingleBoArticleRetriever = createSelector(
   retrieveChosenSingleBoArticle,
   (chosenSingleBoArticle) => ({
     chosenSingleBoArticle,
   })
 );
+
 export function VisitMyPage(props: any) {
   // INITIALIZATIONS
-  const { verifiedMemberData } = props;
   const {
     setChosenMember,
     setChosenMemberBoArticles,
@@ -85,35 +88,37 @@ export function VisitMyPage(props: any) {
     chosenMemberBoArticlesRetriever
   );
   const { chosenSingleBoArticle } = useSelector(chosenSingleBoArticleRetriever);
+
   const [value, setValue] = React.useState("1");
   const [articlesRebuild, setArticlesRebuild] = useState<Date>(new Date());
   const [followRebuild, setFollowRebuild] = useState<boolean>(false);
   const [memberArticleSearchObj, setMemberArticleSearchObj] =
-    useState<SearchMemberArticlesObj>({ mb_id: "none", page: 1, limit: 5 });
+    useState<SearchMemberArticlesObj>({ mb_id: "none", page: 1, limit: 4 });
 
   useEffect(() => {
-    if (!localStorage.getItem("member_data")) {
+    if (!verifiedMemberData) {
       sweetFailureProvider("Please login first", true, true);
     }
 
     const communityService = new CommunityApiService();
     const memberService = new MemberApiService();
 
-    //setChosenMemberBoArticles
     communityService
       .getMemberCommunityArticles(memberArticleSearchObj)
-      .then((data) => setChosenMemberBoArticles(data))
+      .then((data) => {
+        setChosenMemberBoArticles(data);
+      })
       .catch((err) => console.log(err));
 
-    //setChosenMember
     memberService
       .getChosenMember(verifiedMemberData?._id)
-      .then((data) => setChosenMember(data))
+      .then((data) => {
+        setChosenMember(data);
+      })
       .catch((err) => console.log(err));
-  }, [memberArticleSearchObj, articlesRebuild,followRebuild]);
+  }, [memberArticleSearchObj, articlesRebuild, followRebuild]);
 
   // HANDLERS
-
   const handleChange = (event: any, newValue: string) => {
     setValue(newValue);
   };
@@ -162,7 +167,11 @@ export function VisitMyPage(props: any) {
                     >
                       <Box className="bottom_box">
                         <Pagination
-                          count={memberArticleSearchObj.page >= 3 ? memberArticleSearchObj.page + 1 : 3 }
+                          count={
+                            memberArticleSearchObj.page >= 3
+                              ? memberArticleSearchObj.page + 1
+                              : 3
+                          }
                           page={memberArticleSearchObj.page}
                           renderItem={(item) => (
                             <PaginationItem
@@ -171,7 +180,7 @@ export function VisitMyPage(props: any) {
                                 next: ArrowForwardIcon,
                               }}
                               {...item}
-                              color={"secondary"}
+                              color="secondary"
                             />
                           )}
                           onChange={handlePaginationChange}
@@ -184,10 +193,10 @@ export function VisitMyPage(props: any) {
                   <Box className="menu_name">Followers</Box>
                   <Box className="menu_content">
                     <MemberFollowers
-                      actions_enabled={true}
-                      followRebuild = {followRebuild}
+                      followRebuild={followRebuild}
                       setFollowRebuild={setFollowRebuild}
-                      mb_id={props.verifiedMemberData?._id}
+                      actions_enoubled={true}
+                      mb_id={verifiedMemberData?._id}
                     />
                   </Box>
                 </TabPanel>
@@ -195,11 +204,10 @@ export function VisitMyPage(props: any) {
                   <Box className="menu_name">Following</Box>
                   <Box className="menu_content">
                     <MemberFollowing
-                      actions_enabled={true}
-                      
-                      followRebuild = {followRebuild}
+                      followRebuild={followRebuild}
                       setFollowRebuild={setFollowRebuild}
-                      mb_id={props.verifiedMemberData?._id}
+                      actions_enoubled={true}
+                      mb_id={verifiedMemberData?._id}
                     />
                   </Box>
                 </TabPanel>
@@ -207,7 +215,10 @@ export function VisitMyPage(props: any) {
                   <Box className="menu_name">Maqola yozish</Box>
                   <Box className="menu_content">
                     <Box className="write_content">
-                      <TuiEditor />
+                      <TuiEditor
+                        setValue={setValue}
+                        setArticlesRebuild={setArticlesRebuild}
+                      />
                     </Box>
                   </Box>
                 </TabPanel>
@@ -239,7 +250,7 @@ export function VisitMyPage(props: any) {
                 >
                   <div className="order_user_img">
                     <img
-                      src="/auth/default_user.svg"
+                      src={verifiedMemberData?.mb_image}
                       className="order_user_avatar"
                       alt=""
                     />
@@ -247,7 +258,7 @@ export function VisitMyPage(props: any) {
                       <img
                         src={
                           chosenMember?.mb_type === "RESTAURANT"
-                            ? "/icons/restaurant.svg"
+                            ? "/icons/user_icon.svg" //restaurant
                             : "/icons/user_icon.svg"
                         }
                         alt=""
@@ -288,7 +299,7 @@ export function VisitMyPage(props: any) {
                     <Tab
                       style={{ flexDirection: "column" }}
                       value={"4"}
-                      component={(e) => (
+                      component={() => (
                         <Button
                           variant="contained"
                           onClick={() => setValue("4")}
@@ -301,15 +312,19 @@ export function VisitMyPage(props: any) {
                 </Box>
               </Box>
               <Box className="my_page_menu">
-                <TabList onChange={handleChange}>
+                <TabList
+                  orientation="vertical"
+                  variant="scrollable"
+                  value={value}
+                  onChange={handleChange}
+                  aria-label="Vertical tabs example"
+                  sx={{ borderRight: 1, borderColor: "divider", width: "95%" }}
+                >
                   <Tab
                     style={{ flexDirection: "column" }}
                     value={"1"}
                     component={() => (
-                      <div
-                        className={`menu_box ${value}`}
-                        onClick={() => setValue("1")}
-                      >
+                      <div className={`menu_box`} onClick={() => setValue("1")}>
                         <img src="/icons/post.svg" alt="" />
                         <span>Maqolalarim</span>
                       </div>
@@ -319,10 +334,7 @@ export function VisitMyPage(props: any) {
                     style={{ flexDirection: "column" }}
                     value={"2"}
                     component={() => (
-                      <div
-                        className={`menu_box ${value}`}
-                        onClick={() => setValue("2")}
-                      >
+                      <div className={`menu_box`} onClick={() => setValue("2")}>
                         <img src="/icons/follower.svg" alt="" />
                         <span>Follower</span>
                       </div>
@@ -332,10 +344,7 @@ export function VisitMyPage(props: any) {
                     style={{ flexDirection: "column" }}
                     value={"3"}
                     component={() => (
-                      <div
-                        className={`menu_box ${value}`}
-                        onClick={() => setValue("3")}
-                      >
+                      <div className={`menu_box`} onClick={() => setValue("3")}>
                         <img src="/icons/following.svg" alt="" />
                         <span>Following</span>
                       </div>

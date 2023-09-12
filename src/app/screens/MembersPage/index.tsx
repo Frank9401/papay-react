@@ -3,8 +3,7 @@ import { Container } from "@mui/material";
 import { Route, Switch, useRouteMatch, useLocation } from 'react-router-dom'
 import { VisitOtherPage } from "./VisitOtherPage";
 import { VisitMyPage } from "./VisitMyPage";
-import "../../../css/my_page.css"
-
+import "../../../css/my_page.css";
 
 function useQuery() {
     const { search } = useLocation();
@@ -12,28 +11,28 @@ function useQuery() {
 }
 
 export function MemberPage(props: any) {
-    // const { verifiedMemberData } = props;
-  let restaurant = useRouteMatch();
 
-  const query = useQuery();
-  const chosen_mb_id: string | null = query.get("mb_id");
-  const chosen_art_id: string | null = query.get("art_id");
-  console.log(chosen_art_id);
+    let restaurant = useRouteMatch();
+    const query = useQuery();
+    const chosen_mb_id: string | null = query.get("mb_id");
+    const chosen_art_id: string | null = query.get("art_id");
+    console.log(chosen_art_id);
 
 
     return (
         <div className="restaurant_page">
             <Switch>
                 <Route path={`${restaurant.path}/other`}>
-                <VisitOtherPage
-                        // verifiedMemberData={verifiedMemberData}
+                    <VisitOtherPage
+
                         chosen_art_id={chosen_art_id}
                         chosen_mb_id={chosen_mb_id} />
+
                 </Route>
                 <Route path={`${restaurant.path}`}>
-                <VisitMyPage />
+                    <VisitMyPage />
                 </Route>
             </Switch>
         </div>
     );
-} 
+}

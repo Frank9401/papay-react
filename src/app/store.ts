@@ -1,19 +1,20 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import HomePageReducer from './screens/Homepage/slice';
 import reduxLogger from "redux-logger";
-import RestaurantPageReducer from "./screens/RestaurantPage/slice";
+import RestaurantPageReducer from './screens/RestaurantPage/slice';
 import OrdersPageReducer from './screens/OrdersPage/slice';
-import CommunityPageReducer from './screens/CommunityPage/slice';
+import communityPageReducer from './screens/CommunityPage/slice';
 import MemberPageReducer from './screens/MembersPage/slice';
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(reduxLogger),
   reducer: {
     homePage: HomePageReducer,
-    restaurantPage: RestaurantPageReducer,
+    restaurantPage:RestaurantPageReducer,
     ordersPage: OrdersPageReducer,
-    communityPage: CommunityPageReducer,
+    communityPage:communityPageReducer,
     memberPage:MemberPageReducer,
+
   },
 });
 

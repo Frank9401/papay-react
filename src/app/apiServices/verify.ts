@@ -25,3 +25,4 @@ if (cookies.get("access_token")) {
 // console.log(member_data);
 
 export const verifiedMemberData = member_data ? member_data : null;
+

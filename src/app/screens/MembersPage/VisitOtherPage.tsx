@@ -327,7 +327,7 @@ export function VisitOtherPage(props: any) {
                       <Tab
                         style={{ flexDirection: "column" }}
                         value={"4"}
-                        component={(e) => (
+                        component={() => (
                           <Button
                             value={chosenMember?._id}
                             onClick={unsubscribeHandler}
@@ -342,7 +342,7 @@ export function VisitOtherPage(props: any) {
                       <Tab
                         style={{ flexDirection: "column" }}
                         value={"4"}
-                        component={(e) => (
+                        component={() => (
                           <Button
                             value={chosenMember?._id}
                             onClick={subscribeHandler}
